@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laurent VOGNITO — R4n3ul0708</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   VARIABLES — modifie ces valeurs pour changer le thème
+   ============================================================ */
+:root {
+  --bg:       #f5f3ef;       /* fond principal */
+  --bg2:      #eceae4;       /* fond secondaire */
+  --surface:  #ffffff;       /* cartes */
+  --border:   #d8d4cc;       /* bordures */
+  --text:     #1a1814;       /* texte principal */
+  --muted:    #7a7568;       /* texte secondaire */
+  --accent:   #1a6b3c;       /* vert — couleur principale */
+  --accent2:  #c0392b;       /* rouge — accentuation */
+  --accent3:  #1a3a6b;       /* bleu — accentuation */
+  --mono:     'DM Mono', monospace;
+  --serif:    'DM Serif Display', serif;
+  --sans:     'DM Sans', sans-serif;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--accent); color: white; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 243, 239, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-name {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.nav-name em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  padding: 120px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--bg2);
+  z-index: -1;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-alias {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+
+.hero-alias::before { content: '// '; }
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+
+.hero-desc strong { color: var(--text); font-weight: 600; }
+
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-ghost { color: var(--muted); }
+.btn-ghost:hover { border-color: var(--text); color: var(--text); }
+
+/* Hero right — info card */
+.hero-right {}
+
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.info-card-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bg2);
+  font-size: 13px;
+  align-items: center;
+}
+
+.info-key {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.info-val { color: var(--text); font-weight: 500; }
+.info-val a { color: var(--accent); }
+.info-val .dot { color: var(--accent); margin-right: 4px; }
+
+/* ============================================================
+   SECTIONS COMMUNES
+   ============================================================ */
+section {
+  padding: 96px 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.skill-group {
+  background: var(--surface);
+  padding: 28px 24px;
+}
+
+.skill-group-name {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--bg2);
+}
+
+.skill-group-name.green { color: var(--accent); border-color: var(--accent); }
+.skill-group-name.red   { color: var(--accent2); border-color: var(--accent2); }
+.skill-group-name.blue  { color: var(--accent3); border-color: var(--accent3); }
+.skill-group-name.tan   { color: #8b7355; border-color: #8b7355; }
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.tag.core {
+  background: var(--bg2);
+  border-color: var(--text);
+  font-weight: 500;
+}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.project-card {
+  background: var(--surface);
+  padding: 32px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.project-card:hover { background: var(--bg2); }
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.project-status {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+  margin-bottom: 12px;
+}
+
+.status-done    { color: var(--accent); border-color: var(--accent); }
+.status-active  { color: var(--accent3); border-color: var(--accent3); }
+
+.project-name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.project-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tech-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+.events-list {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 200px;
+  gap: 24px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.event-row:first-child { border-top: 1px solid var(--border); }
+
+.event-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.event-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.event-name span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.event-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Certifications */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 48px;
+}
+
+.cert-item {
+  background: var(--surface);
+  padding: 20px;
+}
+
+.cert-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.cert-issuer {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+.about-text p strong { color: var(--text); }
+
+.about-text blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin: 24px 0;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-section {
+  background: var(--text);
+  color: var(--bg);
+  padding: 80px 48px;
+  border-bottom: none;
+}
+
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--bg);
+  margin-bottom: 16px;
+}
+
+.contact-heading em {
+  font-style: italic;
+  color: #6ddf9e;
+}
+
+.contact-sub {
+  font-size: 13px;
+  color: #999;
+  line-height: 1.8;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border: 1px solid #333;
+  color: var(--bg);
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.contact-link:hover {
+  border-color: #6ddf9e;
+  color: #6ddf9e;
+}
+
+.contact-link-label { font-weight: 500; }
+.contact-link-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--text);
+  border-top: 1px solid #333;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 1px;
+}
+
+footer span { color: #6ddf9e; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 100px 20px 60px; gap: 40px; }
+  .hero::after { display: none; }
+  section { padding: 64px 20px; }
+  .skills-layout { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+  .event-row { grid-template-columns: 1fr; gap: 4px; }
+  .contact-section { padding: 60px 20px; }
+  footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav>
+  <div class="nav-name">Laurent <em>VOGNITO</em></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-tag">r4n3ul70708.me</div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">IoT Security · Computer Vision · CTF</div>
+
+    <h1 class="hero-name">
+      Laurent<br>
+      <em>VOGNITO</em>
+    </h1>
+
+    <div class="hero-alias">R4n3ul0708</div>
+
+    <p class="hero-desc">
+      L2 student in <strong>Embedded Systems & IoT</strong> at IFRI, Université d'Abomey-Calavi.
+      Building at the intersection of <strong>hardware security</strong>,
+      <strong>computer vision</strong>, and <strong>low-level programming</strong>.
+      Based in Cotonou, Bénin 🇧🇯
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">Projects →</a>
+      <a href="https://github.com/Raneult0708" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="mailto:vognitolaurent@gmail.com" class="btn btn-ghost">Contact</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="info-card reveal">
+      <div class="info-card-label">// Profile</div>
+
+      <div class="info-row">
+        <span class="info-key">Status</span>
+        <span class="info-val"><span class="dot">●</span>Student — L2 SE&IoT</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">School</span>
+        <span class="info-val">IFRI — UAC, Bénin</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Focus</span>
+        <span class="info-val">IoT Security + CV + RE</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">GitHub</span>
+        <span class="info-val"><a href="https://github.com/Raneult0708" target="_blank">Raneult0708 ↗</a></span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">CTF</span>
+        <span class="info-val">pwn · rev · web · boot2root</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Pack</span>
+        <span class="info-val">GitHub Student Developer ✓</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Email</span>
+        <span class="info-val"><a href="mailto:vognitolaurent@gmail.com">vognitolaurent@gmail.com</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Skills & Stack</h2>
+  </div>
+
+  <div class="skills-layout reveal">
+
+    <div class="skill-group">
+      <div class="skill-group-name green">Languages</div>
+      <div class="skill-tags">
+        <span class="tag core">Python</span>
+        <span class="tag core">C</span>
+        <span class="tag core">C++</span>
+        <span class="tag">Java</span>
+        <span class="tag">Assembly x86/ARM</span>
+        <span class="tag">Bash</span>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">Rust ⟨learning⟩</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name red">Cybersecurity</div>
+      <div class="skill-tags">
+        <span class="tag core">Reverse Engineering</span>
+        <span class="tag core">Web Exploitation</span>
+        <span class="tag core">CTF</span>
+        <span class="tag">Ghidra</span>
+        <span class="tag">Radare2</span>
+        <span class="tag">Pwntools</span>
+        <span class="tag">Burp Suite</span>
+        <span class="tag">Scapy</span>
+        <span class="tag">Kali Linux</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name blue">AI & Computer Vision</div>
+      <div class="skill-tags">
+        <span class="tag core">OpenCV</span>
+        <span class="tag core">PyTorch</span>
+        <span class="tag core">NumPy / Pandas</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">YOLOv8</span>
+        <span class="tag">Matlab</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name tan">Embedded & IoT</div>
+      <div class="skill-tags">
+        <span class="tag core">ESP32</span>
+        <span class="tag core">Arduino</span>
+        <span class="tag core">Raspberry Pi</span>
+        <span class="tag">UART / SPI / I2C</span>
+        <span class="tag">MQTT</span>
+        <span class="tag">OpenOCD</span>
+        <span class="tag">arm-none-eabi</span>
+        <span class="tag">Capteurs & actionneurs</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name green">Dev Logiciel</div>
+      <div class="skill-tags">
+        <span class="tag core">Django</span>
+        <span class="tag core">Qt (C++)</span>
+        <span class="tag">Django REST Framework</span>
+        <span class="tag">Swing (Java)</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Git</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-name red">Outils RE & Analyse</div>
+      <div class="skill-tags">
+        <span class="tag core">Ghidra</span>
+        <span class="tag core">binwalk</span>
+        <span class="tag">Radare2</span>
+        <span class="tag">GDB + peda</span>
+        <span class="tag">angr</span>
+        <span class="tag">capstone</span>
+        <span class="tag">Wireshark</span>
+        <span class="tag">Volatility</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section id="projects" style="background: var(--bg2);">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+
+  <div class="projects-grid reveal">
+
+    <!-- ── PROJET 1 ── -->
+    <div class="project-card">
+      <div class="project-num">PROJECT / 01</div>
+      <span class="project-status status-done">Completed</span>
+      <h3 class="project-name">PhishAnalyzer AI</h3>
+      <p class="project-desc">
+        Web tool for phishing analysis — detects suspicious links and malicious emails
+        using AI. Generates a complete PDF report with risk scoring.
+        Integrates VirusTotal and Cohere/OpenAI APIs.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Django</span>
+        <span class="tech-tag">BeautifulSoup</span>
+        <span class="tech-tag">VirusTotal API</span>
+        <span class="tech-tag">Cohere / OpenAI</span>
+        <span class="tech-tag">Tailwind CSS</span>
+        <span class="tech-tag">WeasyPrint</span>
+      </div>
+    </div>
+
+    <!-- ── PROJET 2 ── -->
+    <div class="project-card">
+      <div class="project-num">PROJECT / 02</div>
+      <span class="project-status status-done">Completed</span>
+      <h3 class="project-name">Spam Detector</h3>
+      <p class="project-desc">
+        Machine learning algorithm for spam email detection.
+        Text preprocessing pipeline with TF-IDF vectorization,
+        trained and evaluated with Scikit-learn classifiers.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Scikit-learn</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">NLP</span>
+        <span class="tech-tag">TF-IDF</span>
+      </div>
+    </div>
+
+    <!-- ── PROJET 3 (à compléter quand tu auras le suivant) ── -->
+    <div class="project-card">
+      <div class="project-num">PROJECT / 03</div>
+      <span class="project-status status-active">In Progress</span>
+      <h3 class="project-name">SmartCam IoT</h3>
+      <p class="project-desc">
+        Intelligent surveillance system on Raspberry Pi with YOLOv8 Nano
+        real-time person detection. MongoDB Atlas logging,
+        Telegram alerts, Flask API dashboard.
+      </p>
+      <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">YOLOv8</span>
+        <span class="tech-tag">OpenCV</span>
+        <span class="tech-tag">Raspberry Pi</span>
+        <span class="tech-tag">MongoDB</span>
+        <span class="tech-tag">Flask</span>
+      </div>
+    </div>
+
+    <!-- ── SLOT VIDE — à remplir ── -->
+    <div class="project-card" style="opacity:.5;">
+      <div class="project-num">PROJECT / 04</div>
+      <h3 class="project-name" style="font-size:1rem; color:var(--muted);">Next project — coming soon</h3>
+      <p class="project-desc" style="font-size:12px;">
+        <!-- Ajoute ton prochain projet ici quand il sera prêt -->
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EVENTS & CERTIFICATIONS
+     ============================================================ -->
+<section id="events">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Events & Certifications</h2>
+  </div>
+
+  <div class="events-list reveal">
+    <div class="event-row">
+      <div class="event-date">Dec 2025</div>
+      <div class="event-name">
+        Deep Learning Indabax Benin 2025
+        <span>Abomey-Calavi, Bénin</span>
+      </div>
+      <div class="event-badge">Deep Learning</div>
+    </div>
+    <div class="event-row">
+      <div class="event-date">Oct 2025</div>
+      <div class="event-name">
+        NASA Space Apps Challenge
+        <span>Cotonou, Bénin — Galactic Problem Solver</span>
+      </div>
+      <div class="event-badge">NASA Award</div>
+    </div>
+    <div class="event-row">
+      <div class="event-date">Jun 2025</div>
+      <div class="event-name">
+        Finale HACKERLAB 2025
+        <span>Cotonou, Bénin</span>
+      </div>
+      <div class="event-badge">Cybersecurity</div>
+    </div>
+    <div class="event-row">
+      <div class="event-date">2024–2025</div>
+      <div class="event-name">
+        Hackathon Hack4IFRI
+        <span>IFRI — Université d'Abomey-Calavi</span>
+      </div>
+      <div class="event-badge">Hackathon</div>
+    </div>
+  </div>
+
+  <div class="certs-grid reveal">
+    <div class="cert-item">
+      <div class="cert-name">Certified Cybersecurity Educator Professional (CCEP)</div>
+      <div class="cert-issuer">Red Team Leaders</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Introduction to Cybersecurity</div>
+      <div class="cert-issuer">Cisco</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Python Basic Certificate</div>
+      <div class="cert-issuer">HackerRank</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Intermediate Python</div>
+      <div class="cert-issuer">DataCamp</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Introduction to Python</div>
+      <div class="cert-issuer">DataCamp</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Introduction to SQL</div>
+      <div class="cert-issuer">Sololearn</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">Réussir dans le DevOps</div>
+      <div class="cert-issuer">LinkedIn Learning</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-name">L'essentiel de Java / Python</div>
+      <div class="cert-issuer">LinkedIn Learning</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" style="background: var(--bg2);">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">About</h2>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I'm <strong>Laurent KPESSOU N. VOGNITO</strong>, a student in
+        <strong>Embedded Systems & IoT</strong> at IFRI, Université d'Abomey-Calavi.
+        I got my Baccalauréat série C with <strong>Mention Très-Bien</strong> in 2024.
+      </p>
+      <p>
+        I'm passionate about low-level programming and the intersection of
+        <strong>hardware and software security</strong>. I build things that work
+        at every layer — from assembly to web APIs.
+      </p>
+      <blockquote>
+        "Security is not a product, it's a process — and it starts at the hardware level."
+      </blockquote>
+      <p>
+        Outside coding: reading, chess, basketball, and of course — <strong>CTFs</strong>.
+      </p>
+    </div>
+
+    <div>
+      <div class="info-card">
+        <div class="info-card-label">// Education</div>
+        <div class="info-row">
+          <span class="info-key">2024–2028</span>
+          <span class="info-val">Licence Pro SE&IoT — IFRI, UAC</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">2023–2024</span>
+          <span class="info-val">Bac série C — Les HIBISCUS, Parakou (Mention TB)</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">2020–2021</span>
+          <span class="info-val">BEPC — CEG Hubert C. MAGA, Parakou</span>
+        </div>
+        <div class="info-card-label" style="margin-top:20px;">// Langues</div>
+        <div class="info-row">
+          <span class="info-key">Français</span>
+          <span class="info-val">Natif</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Anglais</span>
+          <span class="info-val">Intermédiaire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-heading">Let's build<br><em>something</em>.</h2>
+      <p class="contact-sub">
+        Open for collaborations, CTF teams,<br>
+        IoT/hardware security projects,<br>
+        and knowledge exchange.
+      </p>
+    </div>
+
+    <div class="contact-links">
+      <a href="mailto:vognitolaurent@gmail.com" class="contact-link">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-sub">vognitolaurent@gmail.com</div>
+        </div>
+        <span>→</span>
+      </a>
+      <a href="https://github.com/Raneult0708" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-sub">github.com/Raneult0708</div>
+        </div>
+        <span>→</span>
+      </a>
+      <a href="https://linkedin.com/in/Laurent-VOGNITO" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-sub">Laurent VOGNITO</div>
+        </div>
+        <span>→</span>
+      </a>
+      <a href="https://x.com/vognito44454" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">X / Twitter</div>
+          <div class="contact-link-sub">@vognito44454</div>
+        </div>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 <span>Laurent VOGNITO</span> — R4n3ul0708</div>
+  <div>r4n3ul70708.me</div>
+  <div>Hosted on <span>GitHub Pages</span></div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
